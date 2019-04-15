@@ -1,0 +1,69 @@
+from pulp import *
+
+prob = LpProblem('shift', LpMinimize)
+x0 = LpVariable("x0", lowBound=0, cat='Integer')
+x1 = LpVariable("x1", lowBound=0, cat='Integer')
+x2 = LpVariable("x2", lowBound=0, cat='Integer')
+x3 = LpVariable("x3", lowBound=0, cat='Integer')
+x4 = LpVariable("x4", lowBound=0, cat='Integer')
+x5 = LpVariable("x5", lowBound=0, cat='Integer')
+x6 = LpVariable("x6", lowBound=0, cat='Integer')
+x7 = LpVariable("x7", lowBound=0, cat='Integer')
+x8 = LpVariable("x8", lowBound=0, cat='Integer')
+x9 = LpVariable("x9", lowBound=0, cat='Integer')
+x10 = LpVariable("x10", lowBound=0, cat='Integer')
+x11 = LpVariable("x11", lowBound=0, cat='Integer')
+x12 = LpVariable("x12", lowBound=0, cat='Integer')
+x13 = LpVariable("x13", lowBound=0, cat='Integer')
+x14 = LpVariable("x14", lowBound=0, cat='Integer')
+x15 = LpVariable("x15", lowBound=0, cat='Integer')
+
+y9 = LpVariable("y9", lowBound=0, upBound=1, cat='Integer')
+y10 = LpVariable("y10", lowBound=0, upBound=1, cat='Integer')
+y11 = LpVariable("y11", lowBound=0, upBound=1, cat='Integer')
+y12 = LpVariable("y12", lowBound=0, upBound=1, cat='Integer')
+y13 = LpVariable("y13", lowBound=0, upBound=1, cat='Integer')
+y14 = LpVariable("y14", lowBound=0, upBound=1, cat='Integer')
+y15 = LpVariable("y15", lowBound=0, upBound=1, cat='Integer')
+y16 = LpVariable("y16", lowBound=0, upBound=1, cat='Integer')
+y17 = LpVariable("y17", lowBound=0, upBound=1, cat='Integer')
+y18 = LpVariable("y18", lowBound=0, upBound=1, cat='Integer')
+y19 = LpVariable("y19", lowBound=0, upBound=1, cat='Integer')
+y20 = LpVariable("y20", lowBound=0, upBound=1, cat='Integer')
+y21 = LpVariable("y21", lowBound=0, upBound=1, cat='Integer')
+y22 = LpVariable("y22", lowBound=0, upBound=1, cat='Integer')
+y23 = LpVariable("y23", lowBound=0, upBound=1, cat='Integer')
+
+prob += 360 * (x0 + x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9 + x10 + x11 + x12 + x13 + x14 + x15) + \
+        42.5 * (y9 + y10 + y11 + y12 + y13 + y14 + y15 + y16 + y17 + y18 + y19 + y20 + y21 + y22 + y23)
+prob += x0 >= 9  # 0
+prob += x0 + x1 >= 5  # 1
+prob += x0 + x1 + x2 >= 5  # 2
+prob += x0 + x1 + x2 + x3 >= 5  # 3
+prob += x0 + x1 + x2 + x3 + x4 >= 5  # 4
+prob += x0 + x1 + x2 + x3 + x4 + x5 - x0 >= 27  # 5
+prob += x0 + x1 + x2 + x3 + x4 + x5 + x6 - x1 >= 27  # 6
+prob += x0 + x1 + x2 + x3 + x4 + x5 + x6 + x7 - x2 >= 28  # 7
+prob += x0 + x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 - x3 >= 28  # 8
+prob += x1 + x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9 - x4 + y9 >= 28  # 9
+prob += x2 + x3 + x4 + x5 + x6 + x7 + x8 + x9 + x10 - x5 + y10 >= 28  # 10
+prob += x3 + x4 + x5 + x6 + x7 + x8 + x9 + x10 + x11 - x6 + y11 >= 38  # 11
+prob += x4 + x5 + x6 + x7 + x8 + x9 + x10 + x11 + x12 - x7 + y12 >= 38  # 12
+prob += x5 + x6 + x7 + x8 + x9 + x10 + x11 + x12 + x13 - x8 + y13 >= 38  # 13
+prob += x6 + x7 + x8 + x9 + x10 + x11 + x12 + x13 + x14 - x9 + y14 >= 38  # 14
+prob += x7 + x8 + x9 + x10 + x11 + x12 + x13 + x14 + x15 - x10 + y15 >= 38  # 15
+prob += x8 + x9 + x10 + x11 + x12 + x13 + x14 + x15 - x11 + y16 >= 38  # 16
+prob += x9 + x10 + x11 + x12 + x13 + x14 + x15 - x12 + y17 >= 38  # 17
+prob += x10 + x11 + x12 + x13 + x14 + x15 - x13 + y18 >= 38  # 18
+prob += x11 + x12 + x13 + x14 + x15 - x14 + y19 >= 27  # 19
+prob += x12 + x13 + x14 + x15 - x15 + y20 >= 27  # 20
+prob += x13 + x14 + x15 + y21 >= 27  # 21
+prob += x14 + x15 + y22 >= 27  # 22
+prob += x15 + y23 >= 27  # 23
+
+status = prob.solve()
+
+print(value(x0), value(x1), value(x2), value(x3), value(x4), value(x5), value(x6), value(x7), value(x8), value(x9),
+      value(x10), value(x11), value(x12), value(x13), value(x14), value(x15), value(y9), value(y10), value(y11),
+      value(y12), value(y13), value(y14), value(y15), value(y16), value(y17), value(y18), value(y19), value(y20),
+      value(y21), value(y22), value(y23), value(prob.objective))
